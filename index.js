@@ -68,7 +68,7 @@ app.get('/profile', isLoggedIn, function(req, res) {
 
 app.get('/search', isLoggedIn, function(req, res) {
   //adding today ********
-  var pinballUrl = 'https://opdb.org/api/search/typeahead/?q=' + req.query.name;
+  var pinballUrl = 'https://opdb.org/api/search/?q=' + req.query.name + '&api_token=' + process.env.API_KEY;
   // Use request to call the API
   console.log(pinballUrl);
   axios.get(pinballUrl).then( function(apiResponse) {
@@ -76,6 +76,10 @@ app.get('/search', isLoggedIn, function(req, res) {
     console.log(machine);
    res.render('search', { machine });
   })
+});
+
+app.get('/show', isLoggedIn, function(req, res) {
+   res.render('show');
 });
 
 app.use('/auth', require('./controllers/auth'));

@@ -11,11 +11,13 @@
 
 <% machine.forEach(function(machine) { %>
     <h3>
-        <%= machine.id %> |
-        <%= machine.name %> |
-        <%= machine.supplementary %> 
+       <a href='https://www.ipdb.org/machine.cgi?id=<%= machine.ipdb_id%>' target="_blank"><%= machine.name %> </a> |
+       <a href='https://pintips.net/opdb/<%= machine.opdb_id%>' target="_blank"> Pinball Tips for: <%= machine.name %> </a> 
+        <%= machine.manufacture_date %> |
+        <%= machine.manufacturer.full_name %> 
 	</h3>
 	<% }); %>
 
 <hr> 
 <a href="/">Home</a>
+
