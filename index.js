@@ -9,6 +9,7 @@ const passport = require('./config/passportConfig');
 const flash = require('connect-flash');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const helmet = require('helmet');
+const axios = require('axios'); 
 
 //this is only used by the session store
 const db = require('./models');
@@ -62,7 +63,19 @@ app.get('/', function(req, res) {
 });
 
 app.get('/profile', isLoggedIn, function(req, res) {
-  res.render('profile');
+   res.render('profile');
+});
+
+app.get('/search', isLoggedIn, function(req, res) {
+  //adding today ********
+  var pinballUrl = 'https://opdb.org/api/search/typeahead/?q=' + req.query.name;
+  // Use request to call the API
+  console.log(pinballUrl);
+  axios.get(pinballUrl).then( function(apiResponse) {
+    var machine = apiResponse.data;
+    console.log(machine);
+   res.render('search', { machine });
+  })
 });
 
 app.use('/auth', require('./controllers/auth'));

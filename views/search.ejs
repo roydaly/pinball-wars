@@ -1,0 +1,21 @@
+<h3>What machine would you like to search for?</h3>
+
+
+<form action="/search" method="GET">
+    <input type="text" name="name" placeholder="Name of machine">
+    <input type="submit" value="GET ME MY MACHINE!">
+</form>
+
+<br>
+<p>Flipper Time!</p>
+
+<% machine.forEach(function(machine) { %>
+    <h3>
+        <%= machine.id %> |
+        <%= machine.name %> |
+        <%= machine.supplementary %> 
+	</h3>
+	<% }); %>
+
+<hr> 
+<a href="/">Home</a>
