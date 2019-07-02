@@ -5,5 +5,19 @@
 </p>
 
 <a href="/search">Search for a machine?</a>
+<br>
+<h3>
+Favorite Machines:
+<br>
+<br>
+<% machine.forEach(function(machine) { %>
+  <a href='https://www.ipdb.org/machine.cgi?id=<%= machine.ipdb%>' target="_blank"><%= machine.name %> </a> |
+  <% }); %>
+</h3>
 <hr> 
 <a href="/">Home</a>
+<hr>
+<audio controls autoplay loop>
+  <source src="https://www.ipdb.org/files/966/Williams_1990_Funhouse_Jackpot_Tune.mp3" type="audio/mp3">
+  <p>Your browser doesn't support HTML5 audio. Here is a <a href="https://www.ipdb.org/files/966/Williams_1990_Funhouse_Jackpot_Tune.mp3">link to the audio</a> instead.</p>
+</audio>

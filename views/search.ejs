@@ -2,7 +2,7 @@
 
 
 <form action="/search" method="GET">
-    <input type="text" name="name" placeholder="Name of machine">
+    <input type="text" required name="name" placeholder="Name of machine">
     <input type="submit" value="GET ME MY MACHINE!">
 </form>
 
@@ -15,9 +15,15 @@
        <a href='https://pintips.net/opdb/<%= machine.opdb_id%>' target="_blank"> Pinball Tips for: <%= machine.name %> </a> 
         <%= machine.manufacture_date %> |
         <%= machine.manufacturer.full_name %> 
+        <form method="POST" action="/profile">
+        <input hidden type="text" name="name" value="<%= machine.name %>">
+        <input hidden type="text" name="ipdb" value="<%= machine.ipdb_id %>">
+        <button class="btn btn-primary" type="submit">Add to Favorite Machine Collection</button>
+      </form>
 	</h3>
 	<% }); %>
 
 <hr> 
+<a href="/profile">Profile</a> |
 <a href="/">Home</a>
 

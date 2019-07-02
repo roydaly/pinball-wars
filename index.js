@@ -62,8 +62,19 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-app.get('/profile', isLoggedIn, function(req, res) {
-   res.render('profile');
+app.get('/profile', isLoggedIn, function (req, res) {
+  var machine = db.machine.findAll().then(function(machine) {
+   res.render('profile', {machine})
+  })
+});
+
+app.post('/profile', isLoggedIn, function(req, res) {
+  db.machine.findOrCreate( {
+    name: req.body.name,
+    ipdb: req.body.ipdb
+    }).then(function() {
+    res.redirect('profile');
+    })
 });
 
 app.get('/search', isLoggedIn, function(req, res) {
@@ -78,12 +89,15 @@ app.get('/search', isLoggedIn, function(req, res) {
   })
 });
 
-app.get('/show', isLoggedIn, function(req, res) {
-   res.render('show');
-});
 
 app.use('/auth', require('./controllers/auth'));
 
 var server = app.listen(process.env.PORT || 3000);
 
 module.exports = server;
+
+
+
+
+
+
