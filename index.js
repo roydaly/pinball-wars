@@ -10,6 +10,7 @@ const flash = require('connect-flash');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const helmet = require('helmet');
 const axios = require('axios'); 
+const methodOverride = require('method-override');
 
 //this is only used by the session store
 const db = require('./models');
@@ -30,6 +31,7 @@ app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
+app.use(methodOverride('_method'));
 app.use(helmet());
 
 //configs express-sessions middleware
@@ -69,7 +71,7 @@ app.get('/profile', isLoggedIn, function (req, res) {
 });
 
 app.post('/profile', isLoggedIn, function(req, res) {
-  db.machine.findOrCreate( {
+  db.machine.create( {
     name: req.body.name,
     ipdb: req.body.ipdb
     }).then(function() {
@@ -87,6 +89,21 @@ app.get('/search', isLoggedIn, function(req, res) {
     console.log(machine);
    res.render('search', { machine });
   })
+});
+
+app.get('/profile/:id', function(req, res) {
+  db.machine.findByPk(req.params.id).then(function(machine) { 
+    res.render('profile', {machine, id: parseInt(req.params.id) });
+   });
+  });
+
+
+app.delete('/profile/:id', isLoggedIn, function(req, res) {
+  db.machine.destroy( {
+    where: {id: parseInt(req.params.id)}
+  }).then(function(machine) { 
+    res.redirect('/profile');
+  });
 });
 
 

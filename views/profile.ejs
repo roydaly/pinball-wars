@@ -11,9 +11,13 @@ Favorite Machines:
 <br>
 <br>
 <% machine.forEach(function(machine) { %>
-  <a href='https://www.ipdb.org/machine.cgi?id=<%= machine.ipdb%>' target="_blank"><%= machine.name %> </a> |
+  <a href='https://www.ipdb.org/machine.cgi?id=<%= machine.ipdb%>' target="_blank"><%= machine.name %> </a> 
+  <form method="POST" action="/profile/ <%= machine.id %> /?_method=DELETE">
+<button input type="submit" value="Destroy">Destroy the Machine!</button>
+</form>
   <% }); %>
 </h3>
+
 <hr> 
 <a href="/">Home</a>
 <hr>
