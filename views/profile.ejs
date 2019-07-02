@@ -17,6 +17,19 @@ Favorite Machines:
 </form>
   <% }); %>
 </h3>
+<hr>
+<h3>High Score Upload</h3>
+
+<form enctype="multipart/form-data" action="/profile" method="POST">
+  <input type="file" name="myFile">
+  <input type="submit">
+</form>
+
+<% if (typeof url == 'string' && url) { %>
+    <img style="max-width: 100%;" src="<%= url %>">
+<% } else   { %>
+<p>Please upload something yo</p>
+<% }      %>
 
 <hr> 
 <a href="/">Home</a>
