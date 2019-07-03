@@ -80,16 +80,16 @@ app.post('/profile', isLoggedIn, function(req, res) {
     })
 });
 
-app.post('/profile', upload.single('myFile'), isLoggedIn, function(req, res) {
-  cloudinary.uploader.upload(req.file.path, function(result) {
-    var imgUrl = cloudinary.url(result.public_id, {width: 150, height: 150 })
-    db.usersMachines.create( {
-      cloudinaryUrl: imgUrl
-    }).then(function() {
-      res.redirect('profile');
-    })
-  });
-});
+// app.post('/profile', isLoggedIn, function(req, res) {
+//   cloudinary.uploader.upload(req.file.path, function(result) {
+//     var imgUrl = cloudinary.url(result.public_id, {width: 150, height: 150 })
+//     db.usersMachines.create( {
+//       cloudinaryUrl: imgUrl
+//     }).then(function() {
+//       res.redirect('profile');
+//     })
+//   });
+// });
 
 app.get('/search', isLoggedIn, function(req, res) {
   //adding today ********
