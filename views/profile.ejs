@@ -20,10 +20,20 @@ Favorite Machines:
 <hr>
 <h3>High Score Upload</h3>
 
-<form enctype="multipart/form-data" action="/profile" method="POST">
+<form enctype="multipart/form-data" action="profile/img" method="POST">
+<input hidden type="text" name="name" value="<%= machine.name %>">
+<input hidden type="text" name="ipdb" value="<%= machine.ipdb_id %>">
   <input type="file" name="myFile">
+  <select name="machineId" required>
+        <% machine.forEach(function (machine) { %>
+            <option value="<%= machine.id %>"><%= machine.name %></option>
+        <% }); %>
+    </select><hr />
   <input type="submit">
+
+
 </form>
+
 
 <hr> 
 <a href="/">Home</a>

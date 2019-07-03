@@ -12,6 +12,8 @@ const helmet = require('helmet');
 const axios = require('axios'); 
 const methodOverride = require('method-override');
 const cloudinary = require('cloudinary');
+const multer = require('multer');
+var upload = multer({dest: "./uploads"});
 
 //this is only used by the session store
 const db = require('./models');
@@ -80,16 +82,18 @@ app.post('/profile', isLoggedIn, function(req, res) {
     })
 });
 
-// app.post('/profile', isLoggedIn, function(req, res) {
-//   cloudinary.uploader.upload(req.file.path, function(result) {
-//     var imgUrl = cloudinary.url(result.public_id, {width: 150, height: 150 })
-//     db.usersMachines.create( {
-//       cloudinaryUrl: imgUrl
-//     }).then(function() {
-//       res.redirect('profile');
-//     })
-//   });
-// });
+app.post('/profile/img', upload.single('myFile'), isLoggedIn, function(req, res) {
+  cloudinary.uploader.upload(req.file.path, function(result) {
+    var imgUrl = cloudinary.url(result.public_id, {width: 150, height: 150 })
+    db.usersMachines.create( {
+      cloudinaryUrl: imgUrl,
+      userId: req.user.id,
+      machineId: req.body.machineId
+    }).then(function() {
+      res.redirect('/profile');
+    })
+  });
+});
 
 app.get('/search', isLoggedIn, function(req, res) {
   //adding today ********
@@ -129,4 +133,22 @@ module.exports = server;
 
 
 
+// app.post('/profile', isLoggedIn, function(req, res) {
+//   db.machine.create( {
+//     name: req.body.name,
+//     ipdb: req.body.ipdb
+//     }).then(function() {
+//     res.redirect('profile');
+//     })
+// });
 
+// app.post('/profile', upload.single('myFile'), isLoggedIn, function(req, res) {
+//   cloudinary.uploader.upload(req.file.path, function(result) {
+//     var imgUrl = cloudinary.url(result.public_id, {width: 150, height: 150 })
+//     db.usersMachines.create( {
+//       cloudinaryUrl: imgUrl
+//     }).then(function() {
+//       res.redirect('profile');
+//     })
+//   });
+// });
