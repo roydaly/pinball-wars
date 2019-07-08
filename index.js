@@ -68,8 +68,15 @@ app.get('/', function(req, res) {
 });
 
 app.get('/profile', isLoggedIn, function (req, res) {
-  var machine = db.machine.findAll().then(function(machine) {
-   res.render('profile', {machine})
+  db.machine.findAll()
+    .then(function(machine) {
+      db.usersMachines.findAll({
+        where: {
+          userId : req.user.id
+        }
+      }).then(function(machImg){
+        res.render('profile', {machine, machImg})
+      })
   })
 });
 
@@ -89,7 +96,7 @@ app.post('/profile/img', upload.single('myFile'), isLoggedIn, function(req, res)
       cloudinaryUrl: imgUrl,
       userId: req.user.id,
       machineId: req.body.machineId
-    }).then(function() {
+    }).then(function(imgUrl) {
       res.redirect('/profile');
     })
   });
