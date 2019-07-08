@@ -11,7 +11,8 @@ Favorite Machines:
 <br>
 <br>
 <% machine.forEach(function(machine) { %>
-  <a href='https://www.ipdb.org/machine.cgi?id=<%= machine.ipdb%>' target="_blank"><%= machine.name %> </a> 
+  <a href='https://www.ipdb.org/machine.cgi?id=<%= machine.ipdb%>' target="_blank"><%= machine.name %> </a> |
+  <a href='https://pintips.net/opdb/<%= machine.opdb_id%>' target="_blank"> Pinball Tips for: <%= machine.name %> </a>
   <form method="POST" action="/profile/ <%= machine.id %> /?_method=DELETE">
 <button input type="submit" value="Destroy">Destroy the Machine!</button>
 </form>
@@ -36,7 +37,9 @@ Favorite Machines:
 
 <% machImg.forEach(function(mach){ %>
     <img style="max-width: 100%;" src="<%= mach.cloudinaryUrl %>">
-
+    <form method="POST" action="/profile/img/ <%= mach.cloudinaryUrl %> /?_method=DELETE">
+<button input type="submit" value="Destroy">Destroy the Picture!</button>
+</form>
 <% }); %>
 
 

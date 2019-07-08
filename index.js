@@ -129,6 +129,20 @@ app.delete('/profile/:id', isLoggedIn, function(req, res) {
   });
 });
 
+app.get('/profile/img/:id', function(req, res) {
+  db.usersMachines.findByPk(req.params.id).then(function(mach) { 
+    res.render('profile', {usersMachines, id: parseInt(req.params.id) });
+   });
+  });
+
+app.delete('/profile/img/:id', isLoggedIn, function(req, res) {
+  db.usersMachines.destroy( {
+    where: {id: parseInt(req.params.id)}
+  }).then(function(mach) { 
+    res.redirect('/profile');
+  });
+});
+
 
 app.use('/auth', require('./controllers/auth'));
 
@@ -140,22 +154,3 @@ module.exports = server;
 
 
 
-// app.post('/profile', isLoggedIn, function(req, res) {
-//   db.machine.create( {
-//     name: req.body.name,
-//     ipdb: req.body.ipdb
-//     }).then(function() {
-//     res.redirect('profile');
-//     })
-// });
-
-// app.post('/profile', upload.single('myFile'), isLoggedIn, function(req, res) {
-//   cloudinary.uploader.upload(req.file.path, function(result) {
-//     var imgUrl = cloudinary.url(result.public_id, {width: 150, height: 150 })
-//     db.usersMachines.create( {
-//       cloudinaryUrl: imgUrl
-//     }).then(function() {
-//       res.redirect('profile');
-//     })
-//   });
-// });
