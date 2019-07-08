@@ -3,8 +3,9 @@
 <p>Hello, 
 <%= currentUser.name %>
 </p>
-
+<h3>
 <a href="/search">Search for a machine?</a>
+</h3>
 <br>
 <h3>
 Favorite Machines:
@@ -29,7 +30,7 @@ Favorite Machines:
         <% machine.forEach(function (machine) { %>
             <option value="<%= machine.id %>"><%= machine.name %></option>
         <% }); %>
-    </select><hr />
+    </select>
   <input type="submit">
   </form>
 <hr>
@@ -37,7 +38,7 @@ Favorite Machines:
 
 <% machImg.forEach(function(mach){ %>
     <img style="max-width: 100%;" src="<%= mach.cloudinaryUrl %>">
-    <form method="POST" action="/profile/img/ <%= mach.cloudinaryUrl %> /?_method=DELETE">
+    <form method="POST" action="/profile/img/<%= mach.id %>/?_method=DELETE">
 <button input type="submit" value="Destroy">Destroy the Picture!</button>
 </form>
 <% }); %>

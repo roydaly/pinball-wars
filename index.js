@@ -131,11 +131,12 @@ app.delete('/profile/:id', isLoggedIn, function(req, res) {
 
 app.get('/profile/img/:id', function(req, res) {
   db.usersMachines.findByPk(req.params.id).then(function(mach) { 
-    res.render('profile', {usersMachines, id: parseInt(req.params.id) });
+    res.render('profile/img', {usersMachines, id: parseInt(req.params.id) });
    });
   });
 
 app.delete('/profile/img/:id', isLoggedIn, function(req, res) {
+  console.log(req.params.id)
   db.usersMachines.destroy( {
     where: {id: parseInt(req.params.id)}
   }).then(function(mach) { 
