@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const usersMachines = sequelize.define('usersMachines', {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     cloudinaryUrl: DataTypes.STRING,
     userId: DataTypes.INTEGER,

@@ -1,10 +1,10 @@
-<h2>Home</h2>
+<h2>Pinball Wars!</h2>
 
 <% if (!currentUser) { %>
 <a href="/auth/signup">Signup</a> |
 <a href="/auth/login">Login</a>
 <% } else { %>
-    <p>Hello, <%= currentUser.name %> </p>
+    <h3>Hello, <%= currentUser.name %> </h3>
 <a href="/auth/logout">Logout</a> |
 <a href="/profile">Profile</a>
 <% } %>
