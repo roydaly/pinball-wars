@@ -1,21 +1,24 @@
-<h2><%= currentUser.name %>'s Profile Page</h2>
-
+<h2><%=currentUser.name%>'s Favorite Machines and High Scores!</h2>
+<hr>
 <h3>
-<a href="/search">Want to add a new favorite machine?</a>
+<a href="/search">Click me to add a favorite machine!</a>
 </h3>
 <br>
 <h3>
 Favorite Machines:
 <br>
-<br>
+</h3>
 <% machine.forEach(function(machine) { %>
-  <a href='https://www.ipdb.org/machine.cgi?id=<%= machine.ipdb%>' target="_blank"><%= machine.name %> </a> |
-  <a href='https://pintips.net/opdb/<%= machine.opdb_id%>' target="_blank"> Pinball Tips for: <%= machine.name %> </a>
-  <form method="POST" action="/profile/ <%= machine.id %> /?_method=DELETE">
+<h3>
+  <a href='https://www.ipdb.org/machine.cgi?id=<%= machine.ipdb%>' target="_blank"><%= machine.name %> </a> 
+<a href="/profile/<%= machine.id %>/edit">EDIT THIS MACHINE</a>
+</h3>
+<form method="POST" action="/profile/ <%= machine.id %> /?_method=DELETE">
+<div class= "btn">
 <button input type="submit" value="Destroy">Destroy the Machine!</button>
 </form>
+</div>
   <% }); %>
-</h3>
 <hr>
 <h3>High Score Upload</h3>
 
@@ -36,8 +39,10 @@ Favorite Machines:
 <% machImg.forEach(function(mach){ %>
     <img style="max-width: 100%;" src="<%= mach.cloudinaryUrl %>">
     <form method="POST" action="/profile/img/<%= mach.id %>/?_method=DELETE">
+    <div class= "btn">
 <button input type="submit" value="Destroy">Destroy the Picture!</button>
 </form>
+</div>
 <% }); %>
 
 

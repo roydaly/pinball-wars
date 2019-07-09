@@ -84,6 +84,8 @@ app.post('/profile', isLoggedIn, function(req, res) {
   db.machine.create( {
     name: req.body.name,
     ipdb: req.body.ipdb
+    // opdb: req.body.opdb
+    // <input hidden type="text" name="opdb" value="<%= machine.opdb_id %>">
     }).then(function() {
     res.redirect('profile');
     })
@@ -114,11 +116,15 @@ app.get('/search', isLoggedIn, function(req, res) {
   })
 });
 
-app.get('/profile/:id', function(req, res) {
-  db.machine.findByPk(req.params.id).then(function(machine) { 
-    res.render('profile', {machine, id: parseInt(req.params.id) });
-   });
-  });
+// new 
+app.get('/profile/:id/edit', isLoggedIn, function(req, res) {
+  db.machine.findByPk(parseInt(req.params.id))
+  .then(function(name) {
+      res.render('edit', {machine: name});
+  })
+});
+
+
 
 
 app.delete('/profile/:id', isLoggedIn, function(req, res) {
@@ -129,7 +135,7 @@ app.delete('/profile/:id', isLoggedIn, function(req, res) {
   });
 });
 
-app.get('/profile/img/:id', function(req, res) {
+app.get('/profile/img/:id', isLoggedIn, function(req, res) {
   db.usersMachines.findByPk(req.params.id).then(function(mach) { 
     res.render('profile/img', {usersMachines, id: parseInt(req.params.id) });
    });
@@ -144,6 +150,16 @@ app.delete('/profile/img/:id', isLoggedIn, function(req, res) {
   });
 });
 
+// new
+app.put('/profile/:id', isLoggedIn, function (req, res) {
+  db.machine.update({ 
+      name: req.body.name,
+  }, {
+      where: {id: parseInt(req.params.id)}
+  }).then(function(name) {
+      res.redirect("/profile");
+  });
+});
 
 app.use('/auth', require('./controllers/auth'));
 

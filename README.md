@@ -25,3 +25,5 @@ Express authentication template using Passport + flash messages + custom middlew
   * Run `createdb express_auth_development` to create the development database
   * Run `createdb express_auth_test` to create the test database
   * Run `sequelize db:migrate` to run migrations
+
+<iframe width="560" height="315" src='https://dbdiagram.io/embed/5d1a582aced98361d6dc3a79'> </iframe>
