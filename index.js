@@ -124,7 +124,11 @@ app.get('/profile/:id/edit', isLoggedIn, function(req, res) {
   })
 });
 
-
+app.get('/profile/:id', isLoggedIn, function(req, res) {
+  db.machine.findByPk(req.params.id).then(function(machine) { 
+    res.render('profile', {machine, id: parseInt(req.params.id) });
+   });
+  });
 
 
 app.delete('/profile/:id', isLoggedIn, function(req, res) {
