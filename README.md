@@ -9,7 +9,7 @@
 *API https://opdb.org/api & https://cloudinary.com
 
 
-![alt text](https://dbdiagram.io/embed/5d1a582aced98361d6dc3a79 "Models!")
+(https://dbdiagram.io/embed/5d1a582aced98361d6dc3a79 "Models!")
 
 ## Project two. 
 I decided to make an app for pinball fans. This app is designed to research machines, find hints/tips, make notes and upload pictures of high scores and favorite machines. BUT, the main reason for the app is to create a competitive place for pinball wizards to post their high scores.  
